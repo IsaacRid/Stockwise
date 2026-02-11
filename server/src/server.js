@@ -1,8 +1,19 @@
-const express = rquire("express");
-const cors = require("cors")
+const express = require("express");
+const cors = require("cors");
+const helmet = require("helmet");
 
 const app = express();
-app.use(cors());
+app.use(helmet());
+
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+        methods: ["GET", "POST", "PATCH", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"]
+    })
+);
+
+app.use(express.json());
 
 const PORT = 3000;
 
